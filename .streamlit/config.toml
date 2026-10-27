@@ -1,20 +1,24 @@
-# Configuração do Streamlit. Descomente e ajuste conforme o projeto avançar.
-# O tema pode ser trocado pelo menu ⋮ → Settings → Choose app theme.
+# Identidade visual dos dashboards (gols de Lionel Messi).
+# Paleta derivada do notebook de EDA: roxo profundo (#2d223a, classe de interesse),
+# rosa-claro (#e9d4d0, classe de referência) e a escala "magma" usada nos heatmaps.
+# Tema claro travado: as cores das classes foram escolhidas para fundo claro e
+# ficariam ilegíveis no modo escuro.
 
 [theme]
-paddingTop = "0.5rem"     # espaço abaixo da barra do topo (valor entre aspas)
-# font = "sans serif"     # "sans serif", "serif" ou "monospace"
+base = "light"
+primaryColor = "#8c2981"              # magenta da escala magma: sliders, toggles, abas ativas
+backgroundColor = "#fdfbfa"           # fundo principal, quase branco com leve toque quente
+secondaryBackgroundColor = "#f4ecea"  # sidebar e widgets, tom do rosa-claro da EDA
+textColor = "#2d223a"                 # texto no roxo profundo da EDA
+borderColor = "#e3d3cf"
+linkColor = "#8c2981"
 
-[theme.light]
-primaryColor = "#ff4b4b"            # cor de destaque (widgets, links)
-backgroundColor = "#ffffff"         # fundo da página
-secondaryBackgroundColor = "#f0f2f6"  # fundo da sidebar e de widgets
-textColor = "#31333f"               # cor do texto
-borderColor = "#d5dae5"
+font = "Inter:https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+headingFont = "Outfit:https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&display=swap"
+baseRadius = "0.6rem"
+showWidgetBorder = true
+paddingTop = "0.5rem"
 
-[theme.dark]
-primaryColor = "#ff4b4b"
-backgroundColor = "#0e1117"
-secondaryBackgroundColor = "#262730"
-textColor = "#fafafa"
-borderColor = "#41444e"
+chartCategoricalColors = ["#2d223a", "#de4968", "#8c2981", "#fe9f6d", "#51127c", "#b73779", "#e9d4d0"]
+chartSequentialColors = ["#fcfdbf", "#fec488", "#fd9668", "#f1605d", "#cd4071", "#9e2f7f", "#721f81", "#440f76", "#180f3d", "#000004"]
+chartDivergingColors = ["#2d223a", "#4b3b63", "#7d6b94", "#b9adc8", "#ece6ef", "#f6e3e0", "#eeb5ad", "#de7b78", "#b73779", "#721f81"]

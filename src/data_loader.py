@@ -30,6 +30,25 @@ CLASSES = {
 RAW_PATH = Path("data/raw/data.csv")
 CLEAN_PATH = Path("data/clean/dataset.csv")
 
+# O Excel converteu "11/12" e "12/13" em datas no CSV de origem (as datas dos
+# jogos confirmam: 2011-2012 e 2012-2013).
+TEMPORADAS_CORROMPIDAS = {"11-Dec": "11/12", "Dec-13": "12/13"}
+
+FINALIZACAO_PT = {
+    "Left-footed shot": "Chute de pé esquerdo",
+    "Right-footed shot": "Chute de pé direito",
+    "Penalty": "Pênalti",
+    "Direct free kick": "Falta direta",
+    "Header": "Cabeceio",
+    "Tap-in": "Toque para o gol",
+    "Solo run": "Jogada individual",
+    "Penalty rebound": "Rebote de pênalti",
+    "Deflected shot on goal": "Chute desviado",
+    "Counter attack goal": "Contra-ataque",
+    "Chest": "Peito",
+    "Long distance kick": "Chute de longe",
+}
+
 
 def _minuto_regulamentar(valor) -> float:
     """Remove acréscimos (ex.: '90+1' → 90), como no notebook de EDA."""
@@ -109,10 +128,18 @@ def export_clean_dataset(
     return clean
 
 
+def adicionar_colunas_dashboard(df: pd.DataFrame) -> pd.DataFrame:
+    """Cria colunas de apresentação usadas no Dashboard 2 (não altera o CSV)."""
+    out = df.copy()
+    out["temporada"] = out["Season"].replace(TEMPORADAS_CORROMPIDAS)
+    out["finalizacao"] = out["Type"].map(FINALIZACAO_PT).fillna(out["Type"])
+    return out
+
+
 @st.cache_data
 def load_data(path: str = str(CLEAN_PATH)) -> pd.DataFrame:
     """Lê o dataset já tratado (exportado a partir do notebook de EDA)."""
-    return pd.read_csv(path)
+    return adicionar_colunas_dashboard(pd.read_csv(path))
 
 
 if __name__ == "__main__":
